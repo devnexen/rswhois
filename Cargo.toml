@@ -1,0 +1,8 @@
+[package]
+name = "rswhois"
+version = "0.1.0"
+authors = ["David Carlier <devnexen@gmail.com>"]
+
+[dependencies]
+
+getopts = "0.2"
