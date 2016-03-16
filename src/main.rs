@@ -14,8 +14,8 @@ fn usage(pgopts: Options) {
 fn main() {
     let args: Vec<String> = env::args().collect();
     let mut pgopts = Options::new();
-    pgopts.optopt("w", "whost", "Sets a whois host", "HOST");
-    pgopts.optflag("h", "help", "Prints usage");
+    pgopts.optopt("h", "host", "Sets a whois host", "HOST");
+    pgopts.optflag("H", "help", "Prints usage");
     if args.len() < 2 {
         usage(pgopts);
         return;
@@ -29,10 +29,10 @@ fn main() {
     let mut resp = whois::WhoisResponse::new();
     let mut ret: i32 = -1;
 
-    if matches.opt_present("h") {
+    if matches.opt_present("H") {
         usage(pgopts);
         return;
-    } else if matches.opt_present("w") {
+    } else if matches.opt_present("h") {
         let ref addr = if !matches.free.is_empty() {
             matches.free[0].clone()
         } else {
@@ -40,7 +40,7 @@ fn main() {
             return;
         };
 
-        match matches.opt_str("w") {
+        match matches.opt_str("h") {
             Some(host) =>
                 ret = whois::get_server_response(&host, &addr, &mut resp)
             ,
